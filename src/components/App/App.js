@@ -10,6 +10,7 @@ const App = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [playlistName, setPlaylistName] = useState("New Playlist");
   const [playlistTracks, setPlaylistTracks] = useState([]);
+  const [saveSuccess, setSaveSuccess] = useState(false);
 
   const search = useCallback((term) => {
     Spotify.search(term).then(setSearchResults);
@@ -40,6 +41,12 @@ const App = () => {
     Spotify.savePlaylist(playlistName, trackUris).then(() => {
       setPlaylistName("New Playlist");
       setPlaylistTracks([]);
+      setSaveSuccess(true);  // Set the success state to true after saving the playlist
+
+      // Hide the success message after a few seconds:
+      setTimeout(() => {
+        setSaveSuccess(false);
+      }, 5000); // 5 seconds
     });
   }, [playlistName, playlistTracks]);
 
@@ -60,6 +67,7 @@ const App = () => {
             onSave={savePlaylist}
           />
         </div>
+        {saveSuccess && <div className="success-message">You saved your playlist to your profile successfully!</div>}
       </div>
     </div>
   );
