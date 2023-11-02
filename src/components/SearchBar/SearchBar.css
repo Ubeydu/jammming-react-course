@@ -6,6 +6,12 @@
   margin-bottom: 6.33rem;
 }
 
+.SearchBar form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .SearchBar input {
   width: 287px;
   padding: .88rem 0;
@@ -20,6 +26,11 @@
 .SearchBar input:focus {
   outline: none;
 }
+
+.SearchBar input:focus::placeholder {
+  color: transparent;
+}
+
 
 .SearchButton {
   cursor: pointer;

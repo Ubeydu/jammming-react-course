@@ -9,16 +9,19 @@ const SearchBar = (props) => {
     setTerm(event.target.value);
   }, []);
 
-  const search = useCallback(() => {
+  const search = useCallback((event) => {
+    event.preventDefault();
     props.onSearch(term);
   }, [props.onSearch, term]);
 
   return (
     <div className="SearchBar">
-      <input placeholder="Enter A Song Title" onChange={handleTermChange} />
-      <button className="SearchButton" onClick={search}>
-        SEARCH
-      </button>
+        <form onSubmit={search}>
+            <input placeholder="Enter A Song Title" onChange={handleTermChange} />
+            <button className="SearchButton" type="submit">
+            SEARCH
+            </button>
+        </form>
     </div>
   );
 };
